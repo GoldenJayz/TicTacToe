@@ -70,10 +70,41 @@ win* check(char board[9]) // takes in the board and checks if it matches any of 
     char winningPatterns[8][4] = {
         "147", "258", "369",
         "123", "456", "789",
-        "159", "357" 
+        "159", "357"
+    }; // Array of strings
+
+    bool temp[9] = {
+        false, false, false,
+        false, false, false,
+        false, false, false
     };
 
-    int i;
+    for (int i = 0; i < 8; i++)
+    {
+        cout << winningPatterns[i] << endl;
+        for (int c = 0; c < 3; c++)
+        {
+            if (board[c] != '')
+                temp[c] = true;
+            else
+                break;
+        }
+    }
+
+        /*
+        
+        tempArr = { false, false, false,
+                    false, false, false,
+                    false, false, false } // If one matches the pattern then set to true if not break out of the 2nd loop
+
+        for i in arr:
+            for c in i:  // for character in each element
+                if (board[c] != ' '):
+                    tempArr[c] = true
+                else:
+                    break
+        */
+
 
 
     retval->isWon = 0;
