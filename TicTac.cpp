@@ -113,20 +113,29 @@ int main()
 
         while (init->isWon == 0) // While the game has not won
         {
-            cout << board << endl;
-            for (int i = 0; i < 9; i++)
-            {
-
-            }
+ 
 
             cout << "Select a spot: " << endl;
-            char boardPlacement;
+            int boardPlacement;
             cin >> boardPlacement;
             cout << "You chose spot:" << boardPlacement << endl;
 
-            board[(int)boardPlacement] = 'X';
+            board[boardPlacement] = 'X';
 
             win* verdict = check(board);
+
+
+            for (int i = 0; i < 9; i++)
+            {
+                if (i % 3 == 0)
+                {
+                    cout << board[i] << endl;
+                }
+                else
+                {
+                    cout << board[i];
+                }
+            }
 
             if (verdict->isWon == 1)
                 init->isWon = 1;
