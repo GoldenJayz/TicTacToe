@@ -50,7 +50,7 @@ typedef struct win
 
 */
 
-win* check(char board[9]) // takes in the board and checks if it matches any of the winning patterns
+win* check(char board[10]) // takes in the board and checks if it matches any of the winning patterns
 {
     win* retval = (win*) malloc(sizeof(win)); // Allocating memory for the structure thats being returned
     // cout << retval << endl;
@@ -63,8 +63,6 @@ win* check(char board[9]) // takes in the board and checks if it matches any of 
 
     for (int i = 0; i < 8; i++)
     {
-        cout << winningPatterns[i] << endl;
-
         bool temp[9] = {
             false, false, false,
             false, false, false,
@@ -75,17 +73,24 @@ win* check(char board[9]) // takes in the board and checks if it matches any of 
 
         for (int c = 0; c < 3; c++)
         {
+            cout << board[1] << endl;
+            cout << "l: " << board[c] << endl;
+            // not using winningPatterns 
+            /*
+                if (board[c]
+            */
             if (board[c] != ' ')
             {
                 temp[c] = true;
                 matches += 1;
             }
-            else break;
+            
         }
 
         if (matches >= 3) // find if there is 3 trues inside the temp
         {
             cout << "won"; // never being displayed for some reson
+            break;
         }
     }
 
@@ -96,7 +101,7 @@ win* check(char board[9]) // takes in the board and checks if it matches any of 
 int main()
 {
     // char array
-    char board[9] = {
+    char board[10] = {
         ' ', ' ', ' ', // 1 2 3
         ' ', ' ', ' ', // 4 5 6
         ' ', ' ', ' ' // 7 8 9
@@ -104,7 +109,7 @@ int main()
 
     char res[1];
 
-    cout << "Would you like to play tic tac toe? (y/n)";
+    cout << "Would you like to play tic tac toe? (y/n): ";
     cin >> res;
 
     if (*res == 'y')
@@ -120,12 +125,12 @@ int main()
             cin >> boardPlacement;
             cout << "You chose spot:" << boardPlacement << endl;
 
-            board[boardPlacement] = 'X';
+            board[boardPlacement - 1] = 'X';
 
             win* verdict = check(board);
 
 
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i <= 9; i++)
             {
                 if (i % 3 == 0)
                 {
