@@ -79,7 +79,7 @@ win* check(char board[10]) // takes in the board and checks if it matches any of
             /*
                 if (board[c]
             */
-            if (board[c] != ' ')
+            if (board[c] != ' ') // check if x or o
             {
                 temp[c] = true;
                 matches += 1;
