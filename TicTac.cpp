@@ -48,8 +48,6 @@ win* check(char board[9], char& whoWon) // takes in the board and checks if it m
             retval->isWon = true;
             break;
         }
-
-
     }
 
     
