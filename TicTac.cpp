@@ -7,7 +7,7 @@ using namespace std;
 
 typedef struct win
 {
-    short isWon;
+    bool isWon;
     char whoWon[1];
 } win;
 
@@ -50,7 +50,7 @@ typedef struct win
 
 */
 
-win* check(char board[10]) // takes in the board and checks if it matches any of the winning patterns
+win* check(char board[9]) // takes in the board and checks if it matches any of the winning patterns
 {
     win* retval = (win*) malloc(sizeof(win)); // Allocating memory for the structure thats being returned
     // cout << retval << endl;
@@ -63,45 +63,40 @@ win* check(char board[10]) // takes in the board and checks if it matches any of
 
     for (int i = 0; i < 8; i++)
     {
-        bool temp[9] = {
-            false, false, false,
-            false, false, false,
-            false, false, false
-        };
-
         int matches = 0;
 
         for (int c = 0; c < 3; c++)
         {
-            cout << board[1] << endl;
-            cout << "l: " << board[c] << endl;
+            // cout << board[1] << endl;
+            // cout << "l: " << board[c] << endl;
             // not using winningPatterns 
             /*
                 if (board[c]
             */
             if (board[c] != ' ') // check if x or o
             {
-                temp[c] = true;
                 matches += 1;
+
             }
             
         }
 
         if (matches >= 3) // find if there is 3 trues inside the temp
         {
-            cout << "won"; // never being displayed for some reson
+            cout << "won" << endl; // never being displayed for some reson
             break;
         }
     }
 
     retval->isWon = 0;
+
     return retval;
 }
 
 int main()
 {
     // char array
-    char board[10] = {
+    char board[9] = {
         ' ', ' ', ' ', // 1 2 3
         ' ', ' ', ' ', // 4 5 6
         ' ', ' ', ' ' // 7 8 9
@@ -118,21 +113,20 @@ int main()
 
         while (init->isWon == 0) // While the game has not won
         {
- 
-
-            cout << "Select a spot: " << endl;
             int boardPlacement;
+            cout << "Select a spot: " << endl;
             cin >> boardPlacement;
             cout << "You chose spot:" << boardPlacement << endl;
 
             board[boardPlacement - 1] = 'X';
+
 
             win* verdict = check(board);
 
 
             for (int i = 0; i <= 9; i++)
             {
-                if (i % 3 == 0)
+                if (i + 1 % 3 == 0)
                 {
                     cout << board[i] << endl;
                 }
