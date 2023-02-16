@@ -74,7 +74,7 @@ win* check(char board[9]) // takes in the board and checks if it matches any of 
                 if (board[c]
             */
             char curPoint = winningPatterns[i][c];
-
+            // Given me charcode int
             if (board[(int) curPoint] != ' ') // Switch to x or o
             {
                 matches += 1;
