@@ -73,12 +73,12 @@ win* check(char board[9]) // takes in the board and checks if it matches any of 
             /*
                 if (board[c]
             */
-            if (board[c] != ' ') // check if x or o
+            char curPoint = winningPatterns[i][c];
+
+            if (board[(int) curPoint] != ' ') // Switch to x or o
             {
                 matches += 1;
-
             }
-            
         }
 
         if (matches >= 3) // find if there is 3 trues inside the temp
@@ -124,9 +124,9 @@ int main()
             win* verdict = check(board);
 
 
-            for (int i = 0; i <= 9; i++)
+            for (int i = 0; i < 9; i++)
             {
-                if (i + 1 % 3 == 0)
+                if (i % 3 == 0)
                 {
                     cout << board[i] << endl;
                 }
