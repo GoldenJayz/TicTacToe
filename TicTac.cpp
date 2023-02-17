@@ -1,5 +1,3 @@
-// Tic Tac toe program in C
-
 #include <iostream>
 #include <stdlib.h>
 #include <string>
@@ -54,13 +52,12 @@ typedef struct win
 win* check(char board[9]) // takes in the board and checks if it matches any of the winning patterns
 {
     win* retval = (win*) malloc(sizeof(win)); // Allocating memory for the structure thats being returned
-    // cout << retval << endl;
-
     char winningPatterns[8][4] = {
         "147", "258", "369",
         "123", "456", "789",
         "159", "357"
-    }; // Array of strings
+    };
+    retval->isWon = false;
 
     for (int i = 0; i < 8; i++)
     {
@@ -72,7 +69,6 @@ win* check(char board[9]) // takes in the board and checks if it matches any of 
             string s(1, curPoint);
             int intCurPoint = stoi(s);
 
-            // Given me charcode int
             if (board[intCurPoint] != ' ') // Switch to x or o
             {
                 matches += 1;
@@ -82,45 +78,40 @@ win* check(char board[9]) // takes in the board and checks if it matches any of 
         if (matches >= 3) // find if there is 3 trues inside the temp
         {
             cout << "won" << endl;
+            retval->isWon = true;
             break;
         }
     }
-
-    retval->isWon = 0;
 
     return retval;
 }
 
 int main()
 {
-    // char array
+    char res = ' ';
     char board[9] = {
         ' ', ' ', ' ', // 1 2 3
         ' ', ' ', ' ', // 4 5 6
         ' ', ' ', ' ' // 7 8 9
     }; // Creates Tic Tac Toe board
 
-    char res[1];
-
     cout << "Would you like to play tic tac toe? (y/n): ";
     cin >> res;
 
-    if (*res == 'y')
+    if (res == 'y')
     {
         win* init = check(board); // Runs a check just so we can get the isWon so we can start the while loop
 
-        while (init->isWon == 0) // While the game has not won
+        while (init->isWon == false) // While the game has not won
         {
             int boardPlacement;
+            win* verdict;
             cout << "Select a spot: " << endl;
             cin >> boardPlacement;
             cout << "You chose spot:" << boardPlacement << endl;
 
             board[boardPlacement - 1] = 'X';
-
-
-            win* verdict = check(board);
-
+            verdict = check(board);
 
             for (int i = 0; i < 9; i++)
             {
@@ -134,8 +125,8 @@ int main()
                 }
             }
 
-            if (verdict->isWon == 1)
-                init->isWon = 1;
+            if (verdict->isWon == true)
+                init->isWon = true;
 
             free(verdict);
         }
