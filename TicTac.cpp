@@ -69,9 +69,14 @@ win* check(char board[9]) // takes in the board and checks if it matches any of 
             string s(1, curPoint);
             int intCurPoint = stoi(s);
 
-            if (board[intCurPoint] != ' ') // Switch to x or o
+            if (board[intCurPoint - 1] != ' ') // Switch to x or o
             {
                 matches += 1;
+            }
+
+            if (matches == 3)
+            {
+                break;
             }
         }
 
@@ -115,7 +120,7 @@ int main()
 
             for (int i = 0; i < 9; i++)
             {
-                if ((i + 1) % 3 == 0 && i != 8)
+                if ((i + 1) % 3 == 0)
                 {
                     cout << board[i] << endl;
                 }
