@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <string>
 using namespace std;
 
 
@@ -67,15 +68,12 @@ win* check(char board[9]) // takes in the board and checks if it matches any of 
 
         for (int c = 0; c < 3; c++)
         {
-            // cout << board[1] << endl;
-            // cout << "l: " << board[c] << endl;
-            // not using winningPatterns 
-            /*
-                if (board[c]
-            */
             char curPoint = winningPatterns[i][c];
+            string s(1, curPoint);
+            int intCurPoint = stoi(s);
+
             // Given me charcode int
-            if (board[(int) curPoint] != ' ') // Switch to x or o
+            if (board[intCurPoint] != ' ') // Switch to x or o
             {
                 matches += 1;
             }
@@ -83,7 +81,7 @@ win* check(char board[9]) // takes in the board and checks if it matches any of 
 
         if (matches >= 3) // find if there is 3 trues inside the temp
         {
-            cout << "won" << endl; // never being displayed for some reson
+            cout << "won" << endl;
             break;
         }
     }
@@ -126,7 +124,7 @@ int main()
 
             for (int i = 0; i < 9; i++)
             {
-                if (i % 3 == 0)
+                if ((i + 1) % 3 == 0 && i != 8)
                 {
                     cout << board[i] << endl;
                 }
