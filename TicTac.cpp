@@ -91,13 +91,10 @@ int main()
             for (int i = 0; i < 9; i++)
             {
                 if ((i + 1) % 3 == 0)
-                {
                     cout << board[i] << endl;
-                }
+
                 else
-                {
                     cout << board[i];
-                }
             }
 
             if (verdict->isWon == true)
