@@ -67,8 +67,11 @@ int main()
         ' ', ' ', ' ' // 7 8 9
     }; // Creates Tic Tac Toe board
 
-    cout << "Would you like to play tic tac toe? (y/n): ";
-    cin >> res;
+    do
+    {
+        cout << "Would you like to play tic tac toe? (y/n): ";
+        cin >> res;
+    } while (res != 'y' && res != 'n');
 
     if (res == 'y')
     {
@@ -80,9 +83,11 @@ int main()
         {
             int boardPlacement;
             win* verdict;
+   
             cout << "Select a spot: " << endl;
             cin >> boardPlacement;
             cout << "You chose spot:" << boardPlacement << endl;
+
 
             board[boardPlacement - 1] = turn;
             verdict = check(board, turn);
@@ -98,7 +103,7 @@ int main()
             if (verdict->isWon == true)
                 init->isWon = true;
 
-            free(verdict);
+            free(verdict); // Could just not free it until the end and just use the same pointer
         }
 
         free(init);
