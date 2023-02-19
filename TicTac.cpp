@@ -33,14 +33,10 @@ win* check(char board[9], char& whoWon) // takes in the board and checks if it m
             int intCurPoint = stoi(s);
 
             if (board[intCurPoint - 1] == whoWon) // Switch to x or o
-            {
                 matches += 1;
-            }
-
+            
             if (matches == 3)
-            {
                 break;
-            }
         }
 
         if (matches >= 3) // find if there is 3 trues inside the temp
@@ -51,7 +47,6 @@ win* check(char board[9], char& whoWon) // takes in the board and checks if it m
         }
     }
 
-    
     if (retval->isWon == false)
     {
         if (whoWon == 'X')
@@ -59,8 +54,6 @@ win* check(char board[9], char& whoWon) // takes in the board and checks if it m
         else
             whoWon = 'X';
     }
-
-        
 
     return retval;
 }
