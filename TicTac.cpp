@@ -34,7 +34,6 @@ win* check(char board[9], char& whoWon) // takes in the board and checks if it m
 
             if (board[intCurPoint - 1] == whoWon) // Switch to x or o
                 matches += 1;
-            
             if (matches == 3)
                 break;
         }
@@ -92,7 +91,6 @@ int main()
             {
                 if ((i + 1) % 3 == 0)
                     cout << board[i] << endl;
-
                 else
                     cout << board[i];
             }
