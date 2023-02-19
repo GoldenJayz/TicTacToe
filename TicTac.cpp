@@ -7,49 +7,11 @@ using namespace std;
 typedef struct win
 {
     bool isWon;
-    char whoWon[1];
+    char whoWon; // More like who are we on
 } win;
 
-/*
-    Have a list of patterns that depict if the game has won or not
 
-    Check if each board cell is filled with a character that is o or x
-    then check if it matches the pattern
-
-    Or I can make it with singular digits like slot
-    1, 2, 3,
-    4, 5, 6,
-    7, 8, 9
-    this makes it so I can use a singular array
-
-    winning patterns singular notation:
-    1 4 7
-    2 5 8
-    3 6 9
-    1 2 3
-    4 5 6
-    7 8 9
-    1 5 9
-    3 5 7
-    then for loop through an array with all the winning patterns
-    and check if each one corresponds
-
-    arr = { '147', '258' }
-
-    tempArr = { false, false, false,
-                false, false, false,
-                false, false, false } // If one matches the pattern then set to true if not break out of the 2nd loop
-
-    for i in arr:
-        for c in i:  // for character in each element
-            if (board[c] != ' '):
-                tempArr[c] = true
-            else:
-                break
-
-*/
-
-win* check(char board[9]) // takes in the board and checks if it matches any of the winning patterns
+win* check(char board[9], char& whoWon) // takes in the board and checks if it matches any of the winning patterns
 {
     win* retval = (win*) malloc(sizeof(win)); // Allocating memory for the structure thats being returned
     char winningPatterns[8][4] = {
@@ -69,7 +31,7 @@ win* check(char board[9]) // takes in the board and checks if it matches any of 
             string s(1, curPoint);
             int intCurPoint = stoi(s);
 
-            if (board[intCurPoint - 1] != ' ') // Switch to x or o
+            if (board[intCurPoint - 1] == whoWon) // Switch to x or o
             {
                 matches += 1;
             }
@@ -82,14 +44,28 @@ win* check(char board[9]) // takes in the board and checks if it matches any of 
 
         if (matches >= 3) // find if there is 3 trues inside the temp
         {
-            cout << "won" << endl;
+            cout << whoWon << "won" << endl;
             retval->isWon = true;
             break;
         }
+
+
     }
+
+    
+    if (retval->isWon == false)
+    {
+        if (whoWon == 'X')
+            whoWon = 'O';
+        else
+            whoWon = 'X';
+    }
+
+        
 
     return retval;
 }
+
 
 int main()
 {
@@ -105,7 +81,9 @@ int main()
 
     if (res == 'y')
     {
-        win* init = check(board); // Runs a check just so we can get the isWon so we can start the while loop
+        char who = 'X';
+        char& turn = who;
+        win* init = check(board, turn); // Runs a check just so we can get the isWon so we can start the while loop
 
         while (init->isWon == false) // While the game has not won
         {
@@ -115,8 +93,8 @@ int main()
             cin >> boardPlacement;
             cout << "You chose spot:" << boardPlacement << endl;
 
-            board[boardPlacement - 1] = 'X';
-            verdict = check(board);
+            board[boardPlacement - 1] = turn;
+            verdict = check(board, turn);
 
             for (int i = 0; i < 9; i++)
             {
